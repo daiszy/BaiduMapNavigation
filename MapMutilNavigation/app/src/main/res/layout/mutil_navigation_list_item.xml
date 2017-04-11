@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/mutil_middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/mutil_middle_icon"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:src="@drawable/position_icon"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/mutil_middle_text"
+            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="8"
+            android:text="省体育场"/>
+        <ImageView
+            android:id="@+id/mutil_middle_delete"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/delete"/>
+    </LinearLayout>
+
+</RelativeLayout>
