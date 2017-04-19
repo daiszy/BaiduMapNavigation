@@ -18,8 +18,8 @@ import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Text;
 import com.baidu.mapapi.model.LatLng;
+import com.example.gaoxixi.mapmutilnavigation.Activity.MutilNavigation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         //获取地图控件引用
         mapView = (MapView) findViewById(R.id.bmapView);
         baiduMap = mapView.getMap();
-
     }
 
     //定位函数

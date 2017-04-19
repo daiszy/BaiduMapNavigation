@@ -68,4 +68,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/android-support-v4.jar')
+    compile files('libs/BaiduNaviSDK_3.3.0.jar')
+    compile files('libs/baidumapapi_bikenavi_v4_2_1.jar')
 }
