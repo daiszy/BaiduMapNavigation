@@ -37,7 +37,9 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.gaoxixi.mapmutilnavigation.util.BikingRouteOverlay;
 import com.example.gaoxixi.mapmutilnavigation.util.OverlayManager;
+import com.example.gaoxixi.mapmutilnavigation.util.TsTSP;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -101,6 +103,7 @@ public class NavigationMainActivity extends AppCompatActivity{
         {
             Distance[0][i+1] = getDistance(startPoint.getLongitudeE6(),startPoint.getLatitudeE6(),
                     middlePoints.get(i).getLongitudeE6(),middlePoints.get(i).getLatitudeE6());
+            Distance[i+1][0] = Distance[0][i+1];
         }
         for(int i = 0;i < middlePoints.size(); i++)
         {
@@ -108,11 +111,18 @@ public class NavigationMainActivity extends AppCompatActivity{
             {
                 Distance[i+1][j+1] = getDistance(middlePoints.get(i).getLongitudeE6(),middlePoints.get(i).getLatitudeE6(),
                         middlePoints.get(j).getLongitudeE6(),middlePoints.get(j).getLatitudeE6());
+                Distance[j+1][i+1] = Distance[i+1][j+1];
             }
         }
 
         /**规划最短路线，得到访问的目标点顺序*/
-        
+        try {
+            TsTSP ts = new TsTSP(middlePoints.size(),Distance);
+            ts.init();
+            ts.solve();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 
         startBikeNavi();
 
@@ -123,6 +133,7 @@ public class NavigationMainActivity extends AppCompatActivity{
         parm = new BikeNaviLauchParam().stPt(startPt).endPt(endPt);
 
     }
+
 
     /**根据经纬度计算两点之间的距离*/
     private Double getDistance(double longt1, double lat1, double longt2,double lat2) {
