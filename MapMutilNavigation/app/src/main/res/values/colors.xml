@@ -7,4 +7,8 @@
     <color name="colorLightGreeen">#00FFFF</color>>
     <color name="colorGray">#878787</color>>
     <color name="colorBlue">#1C86EE</color>>
+    <color name="colorLightYellow">#FFEFD5</color>>
+    <color name="colorRed"> #FF0000</color>>
+    <color name="colorAzure">#E0EEEE</color>>
+
 </resources>

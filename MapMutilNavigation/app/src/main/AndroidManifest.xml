@@ -34,9 +34,11 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- 摄影机 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -47,7 +49,6 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="pR1azYoXQBUKA0pyMkdcLrDlayN3TgVp" />
-
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="48ae76de3f" />
@@ -68,6 +69,7 @@
         <activity android:name=".Activity.MutilNavigation" />
         <activity android:name=".NavigationMainActivity" />
         <activity android:name=".NavigationGuideActivity" />
+        <activity android:name=".Activity.NavigatonMainActivity1"></activity>
     </application>
 
 </manifest>

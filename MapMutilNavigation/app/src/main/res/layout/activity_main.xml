@@ -8,6 +8,12 @@
     android:layout_marginRight="10dp"
     tools:context="com.example.gaoxixi.mapmutilnavigation.MainActivity"
     android:orientation="vertical">
+    <!--搜索框进行搜索地点-->
+    <SearchView
+        android:id="@+id/search_position"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        />
     <!--地图控件-->
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"

@@ -74,7 +74,7 @@
                     android:layout_height="50dp"
                     android:layout_width="wrap_content"
                     android:layout_weight="8"
-                    android:text="西安火车站"/>
+                    android:text="大雁塔"/>
                 <ImageView
                     android:id="@+id/mutil_end_add"
                     android:layout_height="50dp"
@@ -90,8 +90,9 @@
         android:id="@+id/mutil_navigation_button"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorBlue"
+        android:background="@color/colorAzure"
         android:layout_alignParentBottom="true"
         android:text="导航"
+        android:textColor="@color/colorRed"
         android:textSize="14pt"/>
 </RelativeLayout>

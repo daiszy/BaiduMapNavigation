@@ -46,7 +46,7 @@ public class MutilNavigation extends Activity implements View.OnClickListener,mu
     private int positionIcon  = R.drawable.position_icon;
     private String[] positionName = {"省图书馆","省体育场"};
     final String positionName1 = " ";
-    private int positionDelete = R.drawable.delete1;
+    private int positionDelete = R.drawable.delete;
 
     EditText startAddressET,endAddressET,middleAddressET;
     ArrayList<String> listArray = new ArrayList<>();
@@ -159,7 +159,7 @@ public class MutilNavigation extends Activity implements View.OnClickListener,mu
             String startAddress = startAddressET.getText().toString().trim();
             String endAddress = endAddressET.getText().toString().trim();
 
-            Intent intent = new Intent(MutilNavigation.this, NavigationMainActivity.class);
+            Intent intent = new Intent(MutilNavigation.this,NavigatonMainActivity1.class);
             intent.putExtra("startAddress",startAddress);
             intent.putExtra("endAddress",endAddress);
             intent.putStringArrayListExtra("middleAddress",listArray);

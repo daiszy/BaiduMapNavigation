@@ -97,7 +97,6 @@ public class NavigationMainActivity extends AppCompatActivity{
             middlePoints.add(getGeoPointByStr(arrayList.get(i)));
         }
         middlePoints.add(endPoint);
-
         /**计算每两个点之间的距离*/
         for(int i = 0;i < middlePoints.size(); i++)
         {
@@ -120,11 +119,17 @@ public class NavigationMainActivity extends AppCompatActivity{
             TsTSP ts = new TsTSP(middlePoints.size(),Distance);
             ts.init();
             ts.solve();
+            //在地图上显示目标点
+            for(int i = 0; i < ts.pathOrder.size(); i++)
+            {
+                String info = ts.pathOrder.get(i).toString();
+                Toast.makeText(this,info,Toast.LENGTH_SHORT);
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        startBikeNavi();
+       startBikeNavi();
 
         /**定义起始与目标坐标点*/
         LatLng startPt = new LatLng(startPoint.getLatitudeE6(),startPoint.getLongitudeE6());   //西安理工大学
@@ -152,7 +157,7 @@ public class NavigationMainActivity extends AppCompatActivity{
             Geocoder geoCoder = new Geocoder(NavigationMainActivity.this, Locale.CHINA);
             List<Address> addressList = null;
             try {
-                addressList = geoCoder.getFromLocationName(str,1);
+                addressList = geoCoder.getFromLocationName(str,2);
                 if(!addressList.isEmpty())
                 {
                     Address address_temp = addressList.get(0);
@@ -232,6 +237,9 @@ public class NavigationMainActivity extends AppCompatActivity{
                 Log.d("View","onRoutePlanSuccess");
                 Toast.makeText(NavigationMainActivity.this,"算路成功",Toast.LENGTH_SHORT).show();
 
+                /*Intent intent = new Intent();
+                intent.setClass(NavigationMainActivity.this, NavigationGuideActivity.class);
+                startActivity(intent);*/
                 mNaviHelper = BikeNavigateHelper.getInstance();
 
                 View view = mNaviHelper.onCreate(NavigationMainActivity.this);
@@ -254,11 +262,13 @@ public class NavigationMainActivity extends AppCompatActivity{
         mapView.onDestroy();
         mapView = null;
         super.onDestroy();
+        mNaviHelper.quit();
     }
     public void onResume()
     {
         super.onResume();
         mapView.onResume();
+       // mNaviHelper.resume();
     }
     public void onPause()
     {

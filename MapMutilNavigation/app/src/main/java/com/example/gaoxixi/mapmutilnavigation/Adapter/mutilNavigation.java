@@ -83,7 +83,7 @@ public  class mutilNavigation extends BaseAdapter implements View.OnClickListene
 
             /**
              * 把组件引用通过setTag方法附加在View上面，
-             * 当加载第二页的时候，你就不用再次去findViewById了，
+             * 当加载第二页的时候，不用再次去findViewById了，
              * 直接用getTag方法来取出数据引用即可。
              */
             convertView.setTag(viewHolder);

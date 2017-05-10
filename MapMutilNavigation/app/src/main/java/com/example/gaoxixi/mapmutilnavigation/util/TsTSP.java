@@ -7,6 +7,7 @@ import java.util.List;
  * Created by GaoXixi on 2017/4/19.
  */
 
+/**贪心算法计算多个地点的路径顺序*/
 public class TsTSP {
 
     private int destiNum;   //目标点数量
@@ -14,7 +15,7 @@ public class TsTSP {
     private int[] col;    //代表列，选过置0
     private int[] row;   //代表行，选过置0
 
-    List pathOrder = new ArrayList();
+    public List pathOrder = new ArrayList();
    // List<int> pathOrder;
 
     public TsTSP(int destiNum,Double[][] distance)
