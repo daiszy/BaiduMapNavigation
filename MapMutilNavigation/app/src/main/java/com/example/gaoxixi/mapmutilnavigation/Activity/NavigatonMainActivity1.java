@@ -128,11 +128,11 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
         LatLng endPt = new LatLng(endPoint.getLatitudeE6(),endPoint.getLongitudeE6());   //火车站
         PlanNode stNode = PlanNode.withLocation(startPt);
         PlanNode enNode = PlanNode.withLocation(endPt);
-        for(int i = 0; i < middlePoints.size(); i++)
+        for(int i = 0; i < middlePoints.size()-1; i++)
         {
             middlePt.add(new LatLng(middlePoints.get(Integer.parseInt(pathOrder.get(i+1).toString())).getLatitudeE6(),middlePoints.get(Integer.parseInt(pathOrder.get(i+1).toString())).getLongitudeE6()));
         }
-        for(int i = 0; i < middlePoints.size(); i++)
+        for(int i = 0; i < middlePoints.size()-1; i++)
         {
             middleNode.add(PlanNode.withLocation(middlePt.get(i)));
         }
@@ -148,7 +148,7 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
         PlanNode midd = middleNode.get(0);
         mSearch.bikingSearch((new BikingRoutePlanOption())
                     .from(stNode).to(midd));
-        for(int i = 0; i < middlePoints.size()-1; i++)
+        for(int i = 0; i < middlePoints.size()-2; i++)
         {
             mSearch.bikingSearch((new BikingRoutePlanOption())
                     .from(middleNode.get(i)).to(middleNode.get(i+1)));
@@ -242,9 +242,7 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
         {
             Toast.makeText(NavigatonMainActivity1.this, "其他", Toast.LENGTH_SHORT).show();
         }
-
     }
-
     private class MyBikingRouteOverlay extends BikingRouteOverlay
     {
         public MyBikingRouteOverlay(BaiduMap baiduMap) {
@@ -252,16 +250,29 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
         }
         @Override
         public BitmapDescriptor getStartMarker() {
-
             return BitmapDescriptorFactory.fromResource(R.drawable.position_marker);
-
         }
-
         @Override
         public BitmapDescriptor getTerminalMarker() {
-
             return BitmapDescriptorFactory.fromResource(R.drawable.position_marker);
         }
+    }
 
+    //实现地图生命周期管理
+    public void onDestroy()
+    {
+        mapView.onDestroy();
+        mapView = null;
+        super.onDestroy();
+    }
+    public void onResume()
+    {
+        super.onResume();
+        mapView.onResume();
+    }
+    public void onPause()
+    {
+        super.onPause();
+        mapView.onPause();
     }
 }
