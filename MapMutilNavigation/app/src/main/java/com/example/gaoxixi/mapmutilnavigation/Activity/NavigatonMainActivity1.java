@@ -88,24 +88,25 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
         /**根据名称获取经纬度值*/
         startPoint=getGeoPointByStr(startAddress);
         endPoint=getGeoPointByStr(endAddress);
+        middlePoints.add(startPoint);
         for(int i = 0; i < arrayList.size(); i++)
         {
             middlePoints.add(getGeoPointByStr(arrayList.get(i)));
         }
         middlePoints.add(endPoint);
         /**计算每两个点之间的距离*/
-        for(int i = 0;i < middlePoints.size(); i++)
+        for(int i = 0;i < middlePoints.size()-1; i++)
         {
             Distance[0][i+1] = getDistance(startPoint.getLongitudeE6(),startPoint.getLatitudeE6(),
-                    middlePoints.get(i).getLongitudeE6(),middlePoints.get(i).getLatitudeE6());
+                    middlePoints.get(i+1).getLongitudeE6(),middlePoints.get(i+1).getLatitudeE6());
             Distance[i+1][0] = Distance[0][i+1];
         }
-        for(int i = 0;i < middlePoints.size(); i++)
+        for(int i = 0;i < middlePoints.size()-1; i++)
         {
-            for(int j = i+1 ; j < middlePoints.size(); j++)
+            for(int j = i+1 ; j < middlePoints.size()-1; j++)
             {
-                Distance[i+1][j+1] = getDistance(middlePoints.get(i).getLongitudeE6(),middlePoints.get(i).getLatitudeE6(),
-                        middlePoints.get(j).getLongitudeE6(),middlePoints.get(j).getLatitudeE6());
+                Distance[i+1][j+1] = getDistance(middlePoints.get(i+1).getLongitudeE6(),middlePoints.get(i+1).getLatitudeE6(),
+                        middlePoints.get(j+1).getLongitudeE6(),middlePoints.get(j+1).getLatitudeE6());
                 Distance[j+1][i+1] = Distance[i+1][j+1];
             }
         }
@@ -117,7 +118,7 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
             TsTSP ts = new TsTSP(middlePoints.size(),Distance);
             ts.init();
             ts.solve();
-
+            pathOrder = ts.pathOrder;
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,7 +130,7 @@ public class NavigatonMainActivity1 extends AppCompatActivity implements OnGetRo
         PlanNode enNode = PlanNode.withLocation(endPt);
         for(int i = 0; i < middlePoints.size(); i++)
         {
-            middlePt.add(new LatLng(middlePoints.get(i).getLatitudeE6(),middlePoints.get(i).getLongitudeE6()));
+            middlePt.add(new LatLng(middlePoints.get(Integer.parseInt(pathOrder.get(i+1).toString())).getLatitudeE6(),middlePoints.get(Integer.parseInt(pathOrder.get(i+1).toString())).getLongitudeE6()));
         }
         for(int i = 0; i < middlePoints.size(); i++)
         {
