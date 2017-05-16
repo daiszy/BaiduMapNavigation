@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_user_info"
+            android:title="个人信息" />
+        <item
+            android:id="@+id/nav_orders"
+            android:title="轨迹查询" />
+        <item
+            android:id="@+id/nav_tour"
+            android:title="离线地图" />
+        <item
+            android:id="@+id/nav_service"
+            android:title="导航语音包" />
+        <item
+            android:id="@+id/nav_manage"
+            android:title="设置" />
+    </group>
+
+</menu>

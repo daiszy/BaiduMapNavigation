@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+    <LinearLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+        <!--搜索框进行搜索地点-->
+        <SearchView
+            android:id="@+id/search_position"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:layout_weight="40"/>
+        <!--地图控件-->
+        <!--包括底部导航栏控件-->
+        <LinearLayout
+            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            >
+            <include layout="@layout/bottom_action_bar"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="270dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:paddingTop="50dp"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/activity_main_drawer"/>
+</android.support.v4.widget.DrawerLayout>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,20 +60,20 @@
     android:layout_marginRight="10dp"
     tools:context="com.example.gaoxixi.mapmutilnavigation.MainActivity"
     android:orientation="vertical">
-    <!--搜索框进行搜索地点-->
+    &lt;!&ndash;搜索框进行搜索地点&ndash;&gt;
     <SearchView
         android:id="@+id/search_position"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         />
-    <!--地图控件-->
+    &lt;!&ndash;地图控件&ndash;&gt;
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
         android:layout_weight="40"/>
-    <!--包括底部导航栏控件-->
+    &lt;!&ndash;包括底部导航栏控件&ndash;&gt;
     <LinearLayout
         android:layout_height="45dp"
         android:layout_width="match_parent"
@@ -35,4 +87,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</LinearLayout>-->

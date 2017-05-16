@@ -22,7 +22,7 @@
             android:layout_height="50dp"
             android:layout_width="wrap_content"
             android:layout_weight="8"
-            android:text="省体育场"/>
+            android:text="西安省体育场"/>
         <ImageView
             android:id="@+id/mutil_middle_delete"
             android:layout_height="50dp"
