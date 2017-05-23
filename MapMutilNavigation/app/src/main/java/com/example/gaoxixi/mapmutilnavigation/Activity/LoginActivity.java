@@ -9,9 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gaoxixi.mapmutilnavigation.HttpService.GetUserInfoService;
 import com.example.gaoxixi.mapmutilnavigation.HttpService.LoginService;
 import com.example.gaoxixi.mapmutilnavigation.MainActivity;
 import com.example.gaoxixi.mapmutilnavigation.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -75,6 +79,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             intent.putExtra("loginName",UserName);
                             intent.setClass(LoginActivity.this,MainActivity.class);
                             startActivity(intent);
+                        }else {
+                            //提示框
+                            progressDialog.setTitle("提示");
+                            progressDialog.setMessage("登录失败，请重新登录或注册账号！");
+                            progressDialog.show();
+                            progressDialog.setCancelable(true);
                         }
                     }
                 });
@@ -85,6 +95,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.registerBtn:
                 /**注册*/
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -94,5 +106,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         public void run() {
 
         }
+    }
+
+    public String updateDrawLayoutInfo(String userName)
+    {
+        Map<String, Object> map = new HashMap<>();
+        //根据手机号获取用户详细信息
+        GetUserInfoService getUserInfoService = new GetUserInfoService();
+        map = getUserInfoService.HttpPost(userName);
+        try{
+            String UserName = map.get("username").toString().trim();
+            return UserName;
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

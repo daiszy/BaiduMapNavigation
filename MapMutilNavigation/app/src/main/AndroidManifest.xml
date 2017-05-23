@@ -81,7 +81,10 @@
         <activity
             android:name=".Activity.NavigatonMainActivity1"
             android:theme="@style/AppTheme1" />
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.UserInfo" />
+        <activity android:name=".Activity.UserInfoActivity"></activity>
     </application>
 
 </manifest>

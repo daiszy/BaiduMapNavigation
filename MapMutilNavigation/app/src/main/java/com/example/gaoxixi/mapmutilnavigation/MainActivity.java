@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SearchView;
@@ -43,6 +45,11 @@ import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.example.gaoxixi.mapmutilnavigation.Activity.LoginActivity;
 import com.example.gaoxixi.mapmutilnavigation.Activity.MutilNavigation;
+import com.example.gaoxixi.mapmutilnavigation.Activity.UserInfoActivity;
+import com.example.gaoxixi.mapmutilnavigation.HttpService.GetUserInfoService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResultListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -70,7 +77,11 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
     /**侧滑栏相关*/
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private View headView;
+//    private ImageView UserImage;
+    private TextView UserNickName;
 
+    String loginName;
     /**判断是否登录相关*/
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -89,12 +100,13 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
 
         /**登录成功后设置参数*/
         Intent intent = getIntent();
-        String loginName = intent.getStringExtra("loginName");
+        loginName = intent.getStringExtra("loginName");
         if(loginName != null){
             Toast.makeText(MainActivity.this,"您已登录",Toast.LENGTH_SHORT).show();
         }
         editor.putString("loginName",loginName);
         editor.commit();
+
 
         /**为搜索框设置信息*/
         setSearchInfo();
@@ -148,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         preferences = getSharedPreferences("isLogin",MODE_PRIVATE);
         editor = preferences.edit();
+        headView = (View) navigationView.getHeaderView(0);
+        UserNickName = (TextView) headView.findViewById(R.id.UserNickName);
     }
 
     //定位函数
@@ -245,15 +259,15 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         @Override
         public void onClick(View view) {
             //判断是否登录，若登录则显示侧滑栏，若未登录则先进行登录
-
-            String loginName = preferences.getString("loginName",null);
+            final String loginName = preferences.getString("loginName",null);
             Toast.makeText(MainActivity.this,loginName,Toast.LENGTH_SHORT).show();
             if(loginName != null)
             {
-                InitDrawlayout();
+                InitDrawlayout(loginName);
                 drawerLayout.openDrawer(Gravity.LEFT);
                 //更新侧滑栏信息
-                updateDrawLayoutInfo(loginName);
+                 //updateDrawLayoutInfo(loginName);
+                UserNickName.setText("你好，"+loginName);
             }else {
                 String string = "您还未登录，请登录！";
                 Toast.makeText(MainActivity.this,string,Toast.LENGTH_SHORT).show();
@@ -264,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         }
     }
 
-    public void InitDrawlayout()
+    public void InitDrawlayout(final String loginName)
     {
         //禁止手势滑动，只能通过点击图标打开侧滑栏，点击空白处关闭侧滑栏
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -280,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if(id == R.id.imageView)
+        if(id == R.id.UserImage)
         {
             //点击头像
 
@@ -288,6 +302,10 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         if(id ==  R.id.nav_user_info)
         {
             //点击个人信息
+            Intent intent = new Intent();
+            intent.putExtra("username",loginName);
+            intent.setClass(MainActivity.this, UserInfoActivity.class);
+            startActivity(intent);
         }
         if(id ==  R.id.nav_orders)
         {
@@ -311,7 +329,16 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
     //更新侧滑栏信息
     public void updateDrawLayoutInfo(String userName)
     {
-
+        Map<String, Object> map = new HashMap<>();
+        //根据手机号获取用户详细信息
+        GetUserInfoService getUserInfoService = new GetUserInfoService();
+        map = getUserInfoService.HttpPost(loginName);
+        try{
+            String nickName = map.get("nickName").toString().trim();
+            UserNickName.setText(nickName);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     //实现地图生命周期管理
