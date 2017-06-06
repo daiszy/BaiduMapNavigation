@@ -1,7 +1,11 @@
 package com.example.gaoxixi.mapmutilnavigation;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SearchView;
 
+import com.baidu.android.pushservice.PushConstants;
+import com.baidu.android.pushservice.PushManager;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -43,12 +49,18 @@ import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.example.gaoxixi.mapmutilnavigation.Activity.AsignedOrderActivity;
 import com.example.gaoxixi.mapmutilnavigation.Activity.LoginActivity;
 import com.example.gaoxixi.mapmutilnavigation.Activity.MutilNavigation;
 import com.example.gaoxixi.mapmutilnavigation.Activity.UserInfoActivity;
+import com.example.gaoxixi.mapmutilnavigation.HttpService.GetOrderAsignedService;
 import com.example.gaoxixi.mapmutilnavigation.HttpService.GetUserInfoService;
+import com.example.gaoxixi.mapmutilnavigation.HttpService.RecordLocationService;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResultListener, NavigationView.OnNavigationItemSelectedListener {
@@ -59,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
     //定位相关
     LocationClient locationClient;
     private LocationMode mCurrentMode;
+    private static String latitude;
+    private static String longtitue;
 
     /**底部导航栏按钮*/
     TextView BaseMap;    //首页
@@ -81,10 +95,14 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
 //    private ImageView UserImage;
     private TextView UserNickName;
 
-    String loginName;
+    private static String loginName;
     /**判断是否登录相关*/
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+
+  /** 消息提示相关*/
+    NotificationManager nm;
+    static final int NOTIFICATION_ID = 0x123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -98,12 +116,40 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         /**初始化控件*/
         initView();
 
+        /**启动云推送*/
+        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY,"pR1azYoXQBUKA0pyMkdcLrDlayN3TgVp");
+
+
         /**登录成功后设置参数*/
         Intent intent = getIntent();
         loginName = intent.getStringExtra("loginName");
-        if(loginName != null){
-            Toast.makeText(MainActivity.this,"您已登录",Toast.LENGTH_SHORT).show();
+
+        if(loginName != null) {
+            Toast.makeText(MainActivity.this, "您已登录", Toast.LENGTH_SHORT).show();
         }
+            //创建子线程，分别进行get和post传输，上传位置到服务器
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true)
+                    {
+                        try
+                        {
+                            Thread.sleep(10000);
+                            if(loginName != null)
+                            {
+                                /**每隔10秒上传一次位置到服务器*/
+                                recordMyLocation();
+                            }
+
+                        }catch (InterruptedException e){
+
+                        }
+                    }
+                }
+            });
+            thread.start();
+//        }
         editor.putString("loginName",loginName);
         editor.commit();
 
@@ -120,6 +166,40 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         BaseMap.setOnClickListener(new MyClickListenerBaseMap());
         MutilMap.setOnClickListener(new MyClickListenerMutilMap());
         PersonInfo.setOnClickListener(new MyClickListenerPersonInfo());
+
+
+       /* //创建子线程，分别进行get和post传输，获取订单信息
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                while (true)
+                {
+                    try
+                    {
+                        Thread.sleep(5000);
+                        if(loginName != null)
+                        {
+                            List<Map<String,Object>> lists = new ArrayList<Map<String,Object>>();
+                            Map<String, Object> map = new HashMap<>();
+                            *//**每隔1秒更新服务器订单信息*//*
+                          GetOrderAsignedService getOrderAsignedService = new GetOrderAsignedService();
+                           lists = getOrderAsignedService.HttpPost(loginName);
+                            if(lists.size() != 0){
+                                //提示订单产生
+                                notification(lists);
+                              //  Toast.makeText(MainActivity.this, "您有新的订单产生，请查看！", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }catch (InterruptedException e){
+
+                    }
+                }
+            }
+        });
+        thread1.start();*/
+
     }
 
     private void setSearchInfo() {
@@ -162,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         editor = preferences.edit();
         headView = (View) navigationView.getHeaderView(0);
         UserNickName = (TextView) headView.findViewById(R.id.UserNickName);
+        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
 
     //定位函数
@@ -180,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        //option.setScanSpan(1000);    //每隔一秒刷新一次
+        option.setScanSpan(5000);    //每隔5秒刷新一次
         mLocClient.setLocOption(option);
         mLocClient.start();
     }
@@ -222,6 +303,9 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
                     .direction(100).latitude(location.getLatitude())
                     .longitude(location.getLongitude()).build();
             baiduMap.setMyLocationData(locData);
+
+            latitude = String.valueOf(location.getLatitude());
+            longtitue = String.valueOf(location.getLongitude());
 
             LatLng ll = new LatLng(location.getLatitude(),
                         location.getLongitude());
@@ -326,6 +410,12 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         return false;
     }
 
+    //上传位置坐标到服务器
+    public void recordMyLocation(){
+        RecordLocationService recordLocationService = new RecordLocationService();
+        recordLocationService.httpPost(loginName,latitude,longtitue);
+    }
+
     //更新侧滑栏信息
     public void updateDrawLayoutInfo(String userName)
     {
@@ -339,6 +429,27 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         }catch (NullPointerException e){
             e.printStackTrace();
         }
+    }
+
+    public void notification(List<Map<String,Object>> lists){
+
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, AsignedOrderActivity.class);
+        intent.putExtra("infoList",(Serializable)lists);
+        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this,0,intent,0);
+
+        Notification notify = new Notification.Builder(this)
+                .setAutoCancel(true)
+                .setTicker("有新订单")
+                .setSmallIcon(R.drawable.user_image)
+                .setContentTitle("一条新订单")
+                .setContentText("您有一条新的订单产生了")
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setWhen(System.currentTimeMillis())
+                .setContentIntent(pendingIntent)
+                .build();
+        //发送通知
+        nm.notify(NOTIFICATION_ID,notify);
     }
 
     //实现地图生命周期管理
