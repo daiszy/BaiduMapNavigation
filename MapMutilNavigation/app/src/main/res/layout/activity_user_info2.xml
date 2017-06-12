@@ -93,5 +93,53 @@
                 android:layout_width="match_parent"
                 android:layout_marginRight="10dp"/>
         </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:text="状态:"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:id="@+id/info_status"
+                android:text="空闲"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"/>
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:text="等级:"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:id="@+id/info_grade"
+                android:text="1"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"/>
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:text="已接订单数:"
+                android:textSize="20dp"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:id="@+id/info_ordersNum"
+                android:text="0"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"/>
+        </TableRow>
     </TableLayout>>
 </RelativeLayout>

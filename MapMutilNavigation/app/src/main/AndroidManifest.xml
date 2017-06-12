@@ -85,9 +85,7 @@
             android:process=":remote" />
 
         <activity
-            android:name=".Activity.MutilNavigation"
-            android:label="多点导航"
-            android:theme="@style/AppTheme1" />
+            android:name=".Activity.MutilNavigation" />
         <activity
             android:name=".NavigationMainActivity"
             android:theme="@style/AppTheme1" />

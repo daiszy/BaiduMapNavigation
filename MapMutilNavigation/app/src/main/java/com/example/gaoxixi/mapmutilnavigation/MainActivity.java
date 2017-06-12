@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements OnGetGeoCoderResu
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(5000);    //每隔5秒刷新一次
+        option.setScanSpan(10000);    //每隔10秒刷新一次
         mLocClient.setLocOption(option);
         mLocClient.start();
     }

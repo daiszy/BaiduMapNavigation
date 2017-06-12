@@ -56,6 +56,10 @@ public class MutilNavigation extends Activity implements View.OnClickListener,mu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mutil_navigation);
 
+        //Toast.makeText(MutilNavigation.this,"多点路线规划",Toast.LENGTH_LONG).show();
+        CharSequence title = "多点路线规划";
+        setTitle(title);
+
         /**初始化控件*/
         initView();
 

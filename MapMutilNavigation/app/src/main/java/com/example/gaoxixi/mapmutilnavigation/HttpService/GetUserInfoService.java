@@ -76,11 +76,17 @@ public class GetUserInfoService {
                 String sex = jsonObject.getString("sex");
                 String ofCity = jsonObject.getString("ofCity");
                 String telphone = jsonObject.getString("telphone");
+                String status = jsonObject.getString("status");
+                String grade = jsonObject.getString("grade");
+                String ordersNum = jsonObject.getString("ordersNum");
                 map.put("nickName",nickName);
                 map.put("name",name);
                 map.put("sex",sex);
                 map.put("ofCity",ofCity);
                 map.put("telphone",telphone);
+                map.put("status",status);
+                map.put("grade",grade);
+                map.put("ordersNum",ordersNum);
                 return map;
             }
         }catch (Exception e){

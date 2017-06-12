@@ -9,7 +9,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:text = "多点导航"
     tools:context="com.example.gaoxixi.mapmutilnavigation.Activity.MutilNavigation">
 
     <!--<ScrollView-->
@@ -20,6 +19,7 @@
             android:id="@+id/mutil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50px"
             android:orientation="vertical">
             <!--起点布局-->
             <LinearLayout
