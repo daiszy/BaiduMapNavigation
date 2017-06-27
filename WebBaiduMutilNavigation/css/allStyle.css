@@ -1,0 +1,14 @@
+.imgHead{
+	height:80px;
+	margin-left: 500px;
+	margin-top: 5px;
+	float: left;
+}
+.backIndex
+{
+	float: right;
+	padding-top: 25px;
+	padding-right: 10px;
+	text-decoration: none;
+	font-size: 12pt;
+}

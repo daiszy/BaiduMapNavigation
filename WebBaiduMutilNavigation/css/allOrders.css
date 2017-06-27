@@ -1,0 +1,79 @@
+
+body
+{
+	overflow-x: hidden;
+	/*background: #8DB6CD;*/
+	background-color: red;
+}
+
+#allOrders li
+{
+	list-style-type: decimal;
+	margin-top: 10px;
+	/*border-bottom: 1px solid black;*/
+	margin-bottom: 5px;
+}
+a
+{
+	text-decoration: none;
+	color: black;
+}
+a:hover
+{
+	color: black;
+	
+}
+#allOrdersUl
+{
+	margin-left: 50px;
+}
+.rows td
+{
+	padding: 10px;
+	font-size: 14pt;
+	width: 200px;
+}
+table
+{
+	/*margin-left: 100px;*/
+	overflow-x: hidden;
+	text-align: center;
+}
+.buttonAction
+{
+	color: white;
+	background-color: #009ACD;
+	padding: 6px;
+	display: inline-block;
+	border-radius: 8px;
+	font-size: 12pt;
+	margin-left: 7px;
+}
+.buttonAction:hover{
+	/*color: black;*/
+	background-color: #EE5C42;
+}
+#div0,#div1,#div2,#div3,#divContent
+{
+	width: 95%;
+	margin-left: 35px;
+	margin-top: 35px;
+}
+.headDiv
+{
+	background-color:#8DB6CD;
+	border: 1px solid white;
+	height: 90px;
+}
+h2
+{
+	padding-top: 10px;
+	padding-left: 600px;
+}
+#myTab
+{
+	font-size: 12pt;
+}
+table tr:hover{
+	color: red;
+}

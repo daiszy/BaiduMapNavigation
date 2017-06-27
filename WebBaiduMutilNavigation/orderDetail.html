@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单详情</title>
+		<link rel="stylesheet" href="css/allStyle.css" />
+		<link rel="stylesheet" href="css/orderDetail.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script type="text/javascript" src="js/orderDetail.js" ></script>
+	</head>
+	<body>
+		<div class="headDiv">
+			<img src="img/logo2.png" class="imgHead"/>
+			<a href="index.html" class="backIndex"><span>返回首页</span></a>
+			<a href="allOrders.html" class="backIndex"><span>返回上一页</span></a>
+			<h2>基于百度地图的多点导航系统Web端</h2>			
+        </div>
+		<center><form id="orderForm">
+			<table id="OrderInfo">
+				<tr>
+					<td>订单号：</td>
+					<td id="OrderId"></td>
+				</tr>
+				<tr>
+					<td>下单时间：</td>
+					<td id="StartTime"></td>
+				</tr>
+				<tr>
+					<td>具体位置：</td>
+					<td id="Location"></td>
+				</tr>
+				<tr>
+					<td>联系人手机号：</td>
+					<td id="">
+						<input type="text" id="ContactPhone"
+					</td>
+				</tr>
+				<tr>
+					<td>订单状态：</td>
+					<td id="Status"></td>
+				</tr>
+				<tr>
+					<td>要求送达时间：</td>
+					<td id="">
+						<input type="text" id="SendTime"
+					</td>
+				</tr>
+				<tr>
+					<td>订单金额：</td>
+					<td id="Money"></td>
+				</tr>
+				<tr>
+					<td>订单详情：</td>
+					<td id="">
+						<input type="text" id="Detail"
+					</td>
+				</tr>
+				
+				<tr id="showIsAsigned">
+					<td>被分配骑手手机号：</td>
+					<td id="">
+						<input type="text" id="UserTel"
+					</td>
+				</tr>
+				<tr id="showHaveAsigned">
+					<td>订单结束时间：</td>
+					<td id="EndTime"></td>
+				</tr>
+				<tr>
+					<td class="tdBtn">
+						<input type="button" value="确定修改" class="button" onclick="editOrder()"						
+					</td>					
+					<!--<td class="tdBtn">
+						<input type="button" value="删除" class="button" onclick="deleteOrder()"
+					</td>-->
+				</tr>
+			</table>
+		</form>
+		</center>
+	</body>
+</html>

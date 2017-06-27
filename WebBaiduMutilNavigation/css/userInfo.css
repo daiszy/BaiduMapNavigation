@@ -1,0 +1,89 @@
+
+body
+{
+	margin-top: 0;
+	padding-top: 0;
+}
+li
+{
+	list-style: none;
+	margin-top: 10px;
+	
+}
+a
+{
+	text-decoration: none;
+}
+h2
+{
+	margin-left: 600px;
+}
+.backIndex
+{
+	float: right;
+	padding-top: 25px;
+	padding-right: 10px;
+	font-size: 12pt;
+}
+.infoDiv1
+{
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.infoDiv2
+{
+	/*float: left;*/
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.infoImg
+{
+	height: 80px;
+	margin-top:10px ;
+	margin-right:5px ;
+}
+.usersNumDiv
+{
+	
+	/*//height: 20px;*/
+	font-size: 14pt;
+	margin-left: 10px;
+	margin-top: 15px;
+	float: right;
+}
+.infoDetail
+{
+	float: right; 
+	color: red; 	
+}
+#usersNum
+{
+	color: red;
+	
+}
+.headDiv
+{
+	background-color:#8DB6CD;
+	border: 1px solid white;
+	height: 85px;
+	
+}
+#orderNumDiv
+{
+	margin-left: 15px;
+	font-size: 14pt;
+	border: 1px solid white;
+}
+#imgHead
+{
+	height:80px;
+	margin-left: 500px;
+	margin-top: 5px;
+	float: left;
+	/*margin-left: 500px;*/
+}
+.asignedUser:hover
+{
+	color: blue;	
+}

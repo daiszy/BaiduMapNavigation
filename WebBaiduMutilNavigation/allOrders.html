@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全部订单</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/allStyle.css" />
+		<link rel="stylesheet" href="css/allOrders.css" />
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/allOrders.js" ></script>
+	</head>
+	<body>
+		<div class="headDiv">
+			<img src="img/logo2.png" class="imgHead"/>
+			<a href="index.html" class="backIndex"><span>返回首页</span></a>
+			<h2>基于百度地图的多点导航系统Web端</h2>			
+        </div>
+		
+		<ul class="nav nav-tabs" id="myTab">
+			<li class="active"><a href="#allOrders" data-toggle = "tab" onclick="getAllOrdersDiv()">全部订单</a></li>
+			<li><a href="#beAsigned" data-toggle = "tab" onclick="getBeAsignedOrdersDiv()">未分配订单</a></li>
+			<li><a href="#isAsigned" data-toggle = "tab" onclick="getIsAsignedOrdersDiv()">已分配订单</a></li>
+			<li><a href="#haveAsigned" data-toggle = "tab" onclick="getHaveAsignedOrdersDiv()">已完成订单</a></li>	
+		</ul>
+		
+		<div class="tab-content" id="divContent">
+			<div class="tab-pane active in fade" id="allOrders">
+				<!--<p>我是全部订单</p>-->
+				<div class="table-responsive" id="div0">
+					<table class="table">
+						<tbody id="rows0" class="rows">
+							<tr>
+								<td>订单号</td>
+								<td>下单时间</td>
+								<td style="width: 300px;">具体位置</td>
+								<td>联系人手机号</td>
+								<td>订单状态</td>
+								<td>订单操作</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="beAsigned">
+				<!--<p>我是未分配订单</p>-->
+				<div class="table-responsive" id="div1">
+					<table class="table">
+						<tbody id="rows1" class="rows">
+							<tr>
+								<td>订单号</td>
+								<td>下单时间</td>
+								<td>具体位置</td>
+								<td>联系人手机号</td>
+								<td>订单状态</td>
+								<td>订单操作</td>
+							</tr>							
+						</tbody>
+					</table>
+					
+				</div>
+			</div>
+			<div class="tab-pane fade" id="isAsigned">
+				<!--<p>我是已分配订单</p>-->
+				<div class="table-responsive" id="div2">
+					<table class="table">
+						<tbody id="rows2" class="rows">
+							<tr>
+								<td>订单号</td>
+								<td>下单时间</td>
+								<td>具体位置</td>
+								<td>联系人手机号</td>
+								<td>订单状态</td>
+								<td>订单操作</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="haveAsigned">
+				<!--<p>我是已完成订单</p>-->
+				<div class="table-responsive" id="div3">
+					<table class="table">
+						<tbody id="rows3" class="rows">
+							<tr>
+								<td>订单号</td>
+								<td>下单时间</td>
+								<td>具体位置</td>
+								<td>联系人手机号</td>
+								<td>订单状态</td>
+								<td>订单操作</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

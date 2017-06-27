@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>骑手位置监控</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rmCoNtfD8AU4lX24etmcDbBlO52WAvy2"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+	</head>
+
+	<body>
+		<div id="head">
+			<!--<div id="headTop">-->
+				<img src="img/logo2.png" id="imgHead"/>
+				<div class="headDiv"			
+					<center><h2>基于百度地图的多点导航系统Web端</h2></center>				
+	        	</div>
+	        	<!--<a><span>退出</span></a>
+	        	<a href="aboutUs.html"><span>关于我们 &nbsp</span></a>-->
+	        <!--</div>-->
+			<ul class="nav nav-tabs" id="ulHead">
+				<li class="active">
+					<a href="#" style="font-size: 14pt; color: black;">位置监控</a>
+				</li>
+	
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 14pt; color: black;">
+						骑士管理 <span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="userInfo.html">基本信息</a>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 14pt; color: black;">
+						订单管理<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="allOrders.html">订单信息</a>
+						</li>
+						<li>
+							<a href="asignedOrders.html">订单分配</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			
+		</div>
+		<div id="map">
+
+		</div>
+	</body>
+
+</html>

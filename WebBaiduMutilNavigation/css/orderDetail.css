@@ -1,0 +1,49 @@
+
+body
+{
+	margin-top:0 ;
+	padding-top: 0;
+}
+h2
+{
+	padding-left: 600px;
+}
+#orderForm
+{
+	margin-top: 30px;
+	
+}
+#OrderInfo
+{
+	font-size: 14pt;
+}
+.tdBtn
+{
+	padding-top: 10px;
+}
+.button
+{
+	width: 90px;
+	height: 35px;
+	margin-top: 50px;
+	font-size: 14pt;
+	background-color: #00B2EE;
+	color: white;
+	margin-left: 150px;
+	border-radius: 10px;
+	padding-top: 5px 5px;
+}
+.headDiv
+{
+	background-color:#8DB6CD;
+	border: 1px solid white;
+	height: 85px;
+}
+table
+{
+	padding: 25px;
+}
+table tr td
+{
+	padding: 10px;
+}

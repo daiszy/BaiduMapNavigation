@@ -1,0 +1,69 @@
+html
+{
+	height:100%;
+}  			
+body
+{
+	background-color: #A4D3EE;
+	position: relative;
+	height:100%;
+	margin-top:0px;
+	padding-top:0;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	overflow-x: hidden; 
+	overflow-y: hidden;
+}  
+#map
+{
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 2px;
+	height:96%;
+} 
+
+#imgHead
+{
+	height:80px;
+	margin-left: 15px;
+	margin-top: 5px;
+	float: left;
+	margin-left: 500px;
+}
+.headDiv
+{
+	
+	height: 30px;
+}
+#head
+{
+	background-color:#8DB6CD;
+	border: 1px solid white;
+	/*height: 120px;*/
+}
+#headTop
+{
+	border: 1px solid white;
+	background-color:#8DB6CD;
+	height: 75px;
+}
+#ulHead
+{
+	height: 50px;
+	margin-top: 35px;
+	/*background-color:#8DB6CD;*/
+}
+h2
+{
+	padding-top: 10px;
+	padding-left: 600px;
+}
+#ulHead li
+{
+	float: left;
+}
+span{
+	float: right;
+	font-size: 12pt;
+}
+
